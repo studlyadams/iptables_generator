@@ -1,0 +1,42 @@
+#Brainstorm for iptables application
+
+
+iptables -L
+34 iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+33 iptables -A INPUT -p tcp --dport 22 -j REJECT
+32 iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+31 iptables -A INPUT -p tcp --dport 6059 -j ACCEPT
+30 iptables -I INPUT 1 -i lo -j ACCEPT
+29 iptables -A INPUT -p tcp --dport 3000 -j ACCEPT
+28 sudo iptables -P INPUT DROP
+27 
+
+
+Iptables:
+	-L = List
+	-A = Append
+	-I = Interface
+
+		INPUT = Items coming in
+		OUT = Items going out
+
+			-m = load module
+			-p = port
+
+
+Mandatory entries:
+iptables -A INPUT -m conntrack --cstate ESTABLISHED,RELATED -j ACCEPT #Accept all input in regards to already established connections. 
+iptables -I INPUT 1 -i lo -j ACCEPT #accept input from LoopBack device
+sudo iptables -P INPUT DROP #Set to drop all connections that did not pass IPtables flow. 
+
+
+
+
+
+Show greeting.
+List current iptables 
+Ask if you want to clear all entries from IP tables. 
+
+
+
+
